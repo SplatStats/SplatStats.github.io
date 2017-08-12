@@ -3,18 +3,44 @@ body {
     font-family: 'Splatoon Font', Fallback, sans-serif;
 }
 
-.h1{
-    line-height: :300px;
+p {
+    font-family: 'Splatoon Font', Fallback, sans-serif;
+    color: aliceblue;
+}
+
+h1{
+    height: 250px;
+}
+
+footer{
+    position: absolute;
+    bottom: 10px;
+    margin-left: 50%;
+}
+
+.left {
+    position:absolute;
+    min-height: 800px;
+    left:0; top:250px; bottom: 50px;
+    width: 250px;
+    font-size: 1.5em;
+}
+.main {
+    position: absolute;
+    left:250px; top:250px; right:0; bottom:0;
+    color:aliceblue;
 }
 
 #h1-1{
     float: left;
     color: aliceblue;
     font-size: 2em;
-    position: absolute;
-    z-index: 1;
-    top: 0px;
-    left: 25px;
+    padding: 0;
+    margin-bottom: 0;
+    margin-left: 50px;
+    margin-right: 0;
+    margin-top: 40px;
+
 }
 
 #h1-2{
@@ -24,6 +50,9 @@ body {
     margin: 0 auto;
     text-align: center;
     top: 1000px;
+    padding-top: 40px;
+    padding-right: 300px;
+    /*margin-top: 25px;*/
 }
 
 #h1-3{
@@ -32,7 +61,26 @@ body {
     z-index: 10;
     top: 10px;
     right: -25px;
+    margin-bottom: 0;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 0;
+
 }
+
+#table-format{
+    float:left;
+    text-align: left;
+}
+
+th{
+    color: aliceblue;
+}
+
+td{
+    color: aliceblue;
+}
+
 
 @font-face{
     font-family: "Splatoon Font";

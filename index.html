@@ -2,23 +2,139 @@
 <html>
     <head>
        <meta charset="utf-8" />
-       <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0">
        <title>Splat Stats!</title>
        <link rel="stylesheet"href="Style.css" />
-        <h1><p id=h1-1>Stay</br>Fresh</p><p id=h1-2>Splat Stats!</p><div><img id="h1-3" src="Images/Squid%20Sister.png" width=300px alt=""/></div></h1>
+        <h1 id="top"><p id=h1-1>Stay</br>Fresh!</p><p id=h1-2>Splat Stats!</p><div><img id="h1-3" src="Images/Squid%20Sister.png" width=300px alt=""/></div></h1>
     </head>
 <body> 
+    <div class="left">
       <nav>
          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="estimate.html">Estimate</a></li>
-            <li id="currentpage"><a href="#">Digital 101</a></li>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Schedule</a></li>
+            <li><a href="#">Clothes</a></li>
+            <li><a href="#">Brands</a></li>
+            <li><a href="#">Weapons</a></li>
+            <li><a href="#">Stats</a></li>
+            <li><a href="#">Calculator</a></li>
          </ul>
       </nav>
+    </div>
+    <div class="main">
+        <div>
+            Main Ability: 
+                <select name="select"> <!--Supplement an id here instead of using 'name'-->
+                  <option value="value2" selected>(None)</option>
+                  <option value="value1">Ink Saver (Main)</option> 
+                  <option value="value3">Ink Saver (Sub)</option>
+                  <option value="value1">Ink Recovery Up</option> 
+                  <option value="value3">un Speed Up</option>
+                  <option value="value1">Swim Speed Up</option> 
+                  <option value="value3">Special Charge Up</option>
+                  <option value="value1">Special Saver</option> 
+                  <option value="value3">Special Power Up</option>
+                  <option value="value1">Quick Respawn</option> 
+                  <option value="value3">Quick Super Jump</option>
+                  <option value="value1">Sub Power Up</option> 
+                  <option value="value3">Ink Resistance Up</option>
+                  <option value="value1">Cold Blooded</option> 
+                  <option value="value3"> </option>
+                  <option value="value1">Opening Gambit</option> 
+                  <option value="value3">Last Ditch Effort</option>
+                  <option value="value1">Tenacity</option> 
+                  <option value="value3">Comeback</option>
+                  <option value="value1">Ninja Squid</option> 
+                  <option value="value3">Haunt</option>
+                  <option value="value1">Thermal Ink</option> 
+                  <option value="value3">Respawn Punisher</option>
+                  <option value="value1">Ability Doubler</option> 
+                  <option value="value3">Drop Roller</option>
+                </select>
+            Brand: 
+                <select name="select"> <!--Supplement an id here instead of using 'name'-->
+                  <option value="value2" selected>(None)</option>
+                  <option value="value1">Amiibo</option> 
+                  <option value="value3">Annaki</option>
+                  <option value="value3">Cuttlegear</option>
+                  <option value="value1">Enperry</option> 
+                  <option value="value3">Firefin</option>
+                  <option value="value1">Forge</option> 
+                  <option value="value3">Grizzco</option>
+                  <option value="value1">Inkline</option> 
+                  <option value="value3">Krak-On</option>
+                  <option value="value1">Rockenberg</option> 
+                  <option value="value3">Skalop</option>
+                  <option value="value1">Splash Mob</option> 
+                  <option value="value3">SquidForce</option>
+                  <option value="value1">Takoroka</option> 
+                  <option value="value3">Tentatek</option>
+                  <option value="value1">Toni Kensa</option> 
+                  <option value="value3">Zekko</option>
+                  <option value="value1">Zink</option> 
+                </select>
+            Stars/Slots: 
+            <select name="select"> <!--Supplement an id here instead of using 'name'-->
+                  <option value="value2" selected>(None)</option>
+                  <option value="value1">1</option> 
+                  <option value="value3">2</option>
+                  <option value="value3">3</option>
+                </select>
+        </div>
+        <div>
+            <table style="width:100%">
+              <tr>
+                <th></th>
+                <td></td>
+              </tr>
+              <tr>
+                <th width=15% rowspan="3"><div role="listbox" tabindex="0" id="HeadGearLB" onclick="return listItemClick(event);" 
+                  onkeydown="return listItemKeyEvent(event);" onkeypress="return listItemKeyEvent(event);" 
+                  onfocus="this.className='focus';" onblur="this.className='blur';" aria-activedescendant="HeadGearLB-1">
+                  <div role="option" id="HeadGearLB-1" class="selected">Green</div>
+                  <div role="option" id="HeadGearLB-2">Orange</div>
+                  <div role="option" id="HeadGearLB-3">Red</div>
+                  <div role="option" id="HeadGearLB-4">Blue</div>
+                  <div role="option" id="HeadGearLB-5">Violet</div>
+                  <div role="option" id="HeadGearLB-6">Periwinkle</div>
+                </div>
+                </th>
+                <th width=15% rowspan="3"><div role="listbox" tabindex="0" id="ClothesLB" onclick="return listItemClick(event);" 
+                  onkeydown="return listItemKeyEvent(event);" onkeypress="return listItemKeyEvent(event);" 
+                  onfocus="this.className='focus';" onblur="this.className='blur';" aria-activedescendant="ClothesLB-1">
+                  <div role="option" id="ClothesLB-1" class="selected">Green</div>
+                  <div role="option" id="ClothesLB-2">Orange</div>
+                  <div role="option" id="ClothesLB-3">Red</div>
+                  <div role="option" id="ClothesLB-4">Blue</div>
+                  <div role="option" id="ClothesLB-5">Violet</div>
+                  <div role="option" id="ClothesLB-6">Periwinkle</div>
+                </div>
+                <th width=15% rowspan="3"><div role="listbox" tabindex="0" id="ShoesLB" onclick="return listItemClick(event);" 
+                  onkeydown="return listItemKeyEvent(event);" onkeypress="return listItemKeyEvent(event);" 
+                  onfocus="this.className='focus';" onblur="this.className='blur';" aria-activedescendant="ShoesLB-1">
+                  <div role="option" id="ShoesLB-1" class="selected">Green</div>
+                  <div role="option" id="ShoesLB-2">Orange</div>
+                  <div role="option" id="ShoesLB-3">Red</div>
+                  <div role="option" id="ShoesLB-4">Blue</div>
+                  <div role="option" id="ShoesLB-5">Violet</div>
+                  <div role="option" id="ShoesLB-6">Periwinkle</div>
+                </div>
+                </th>
+                <td>Headgear
+                  </td>
+              </tr>
+              <tr>
+                <td>Clothes</td>
+              </tr>
+              <tr>
+                <td>Shoes</td>
+              </tr>
+            </table>
+        </div>
+    </div>
       <footer>
-         <p>Splat Stats! &bull; Austin, Texas</p>
+         <p>Splat Stats!</p>
       </footer>
    </div>
+<script src="Clothes.js"></script>
 </body>
 </html>
