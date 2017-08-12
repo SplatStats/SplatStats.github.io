@@ -7,12 +7,21 @@ var ChosenHedgear;
 var ChosenClothes;
 var ChosenShoes;
 
+var FilterMainAbility = "(None)";
+var FilterBrand = "(None)";
+var FilterStar = "(None)";
+
 var HeadGearOriginal = [];
 var ClothesOriginal = [];
 var ShoesOriginal = [];
+
+var Chosen
+
 /*
 *    EVENTS
 */
+
+document.getElementById("MainAbility").addEventListener("onchange", Filter, false); 
 
 // This function will get the event target in a browser-compatible way
 function getEventTarget(e) {
@@ -37,6 +46,46 @@ ShoesLB.onmousedown = function(event) {
     var target = getEventTarget(event);
     ChosenShoes = (target.innerHTML);
 };
+
+//FILTERING EVENTS
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[name="MainAbility"]').onchange=changeEventHandlerHead;
+},false);
+
+function changeEventHandlerHead(event) {
+    // You can use “this” to refer to the selected element.
+    if(!event.target.value) alert('Please Select One');
+    else {
+            FilterMainAbility = event.target.value;
+            Filter();
+         }
+}
+
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[name="Brand"]').onchange=changeEventHandlerBrand;
+},false);
+
+function changeEventHandlerBrand(event) {
+    // You can use “this” to refer to the selected element.
+    if(!event.target.value) alert('Please Select One');
+    else {
+            FilterBrand = event.target.value;
+            Filter();
+         }
+}
+
+document.addEventListener('DOMContentLoaded',function() {
+    document.querySelector('select[name="Stars"]').onchange=changeEventHandlerStar;
+},false);
+
+function changeEventHandlerStar(event) {
+    // You can use “this” to refer to the selected element.
+    if(!event.target.value) alert('Please Select One');
+    else {
+            FilterStar = event.target.value; 
+            Filter();
+         }
+}
 
 /*
 * GEAR CLASS
@@ -180,14 +229,192 @@ function readTextFile(file, OriginalDataArray)
 }
 
 
+function Filter(){
+    var filteredHead = [];
+    var filteredClothes = [];
+    var filteredShoes = [];
+    ClearList();
+    
+    //filter out main abilities
+    for(var i =0; i < HeadGearOriginal.length; i++){
+        
+        if(FilterMain == "(None)"){
+                continue;
+            }
+        
+        if (HeadGearOriginal[i].MainAbility == FilterMainAbility){
+            filteredHead.push(HeadGearOriginal[i]);
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredHead.length; i++){
+        if (filteredHead[i].GearBrand.Name != FilterBrand ){
+            
+            if(FilterBrand == "(None)"){
+                continue;
+            }
+            
+            filteredHead.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredHead.length; i++){
+        FilterStar = FilterStar.replace("\"", "")
+        if (parseInt(filteredHead[i].Stars) == parseInt(FilterStar) ){
+        }
+        else{
+            if(FilterStar == "(None)"){
+                continue;
+            }
+            
+            filteredHead.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    //filter out main abilities
+    for(var i =0; i < ClothesOriginal.length; i++){
+        if (ClothesOriginal[i].MainAbility == FilterMainAbility){
+            filteredClothes.push(ClothesOriginal[i]);
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredClothes.length; i++){
+        if (filteredClothes[i].GearBrand.Name != FilterBrand ){
+            
+            if(FilterBrand == "(None)"){
+                continue;
+            }
+            
+            filteredClothes.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredClothes.length; i++){
+        if (parseInt(filteredClothes[i].Stars) == parseInt(FilterStar) ){
+        }
+        else{
+            if(FilterStar == "(None)"){
+                continue;
+            }
+            
+            filteredClothes.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    
+    //filter out main abilities
+    for(var i =0; i < ShoesOriginal.length; i++){
+        if (ShoesOriginal[i].MainAbility == FilterMainAbility){
+            filteredShoes.push(ShoesOriginal[i]);
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredShoes.length; i++){
+        if (filteredShoes[i].GearBrand.Name != FilterBrand ){
+            
+            if(FilterBrand == "(None)"){
+                continue;
+            }
+            
+            filteredShoes.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    //filter out Brand
+    for(var i =0; i < filteredShoes.length; i++){
+        if (parseInt(filteredShoes[i].Stars) == parseInt(FilterStar) ){
+        }
+        else{
+            if(FilterStar == "(None)"){
+                continue;
+            }
+            
+            filteredShoes.splice(i,1);
+            if(i = 0){
+                i=0;
+            }
+            else{
+                i--;
+            }
+        }
+    }
+    
+    
+    //display them 
+    
+    for(var i = 0; i< filteredHead.length;i++){
+        GenerateLBDiv(filteredHead[i].Name, "HeadGearLB");
+    }
+    for(var i = 0; i< filteredClothes.length;i++){
+        GenerateLBDiv(filteredClothes[i].Name, "ClothesLB");
+    }
+    for(var i = 0; i< filteredShoes.length;i++){
+        GenerateLBDiv(filteredShoes[i].Name, "ShoesLB");
+    }
+}
 
+function FilterMain(){
+    
+}
 
+//create element for list
 function GenerateLBDiv(InnerText, Element){
     var div = document.createElement("div");
     
     div.innerHTML = InnerText;
 
     document.getElementById(Element).appendChild(div);
+}
+
+//Clear the list
+function ClearList(){
+    var myNode = document.getElementById("HeadGearLB");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    myNode = document.getElementById("ClothesLB");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    myNode = document.getElementById("ShoesLB");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
 }
 
 readTextFile("Data/Clothes/Head Gear.txt", HeadGearOriginal);
