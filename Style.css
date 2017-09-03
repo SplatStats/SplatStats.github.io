@@ -20,6 +20,12 @@ span{
     display: inline-block
 }
 
+figure
+{
+    width:15%;
+    float:left;
+}
+
 img{
     float:left;
 }

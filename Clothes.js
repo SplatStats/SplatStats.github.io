@@ -42,27 +42,50 @@ HeadgearLB.onmousedown = function(event) {
     //finds the chosen pic for images to add
     var GearPics = HeadGearOriginal.filter(x => x.Name === ChosenHedgear.toString())
     
+    //creates elemetns
+    var Fig = document.createElement("figure");    
     var img = document.createElement("img");
     img.src = "Images/Abilities/" + GearPics[0].MainAbility + ".png";
     img.height = 150;
     img.width = 150;
-    var src = document.getElementById("HeadGearSpan");
-    src.appendChild(img);
     
+    var FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Main Ability";
+    
+    var src = document.getElementById("HeadGearSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
     img = document.createElement("img");
     img.src = "Images/Abilities/" + GearPics[0].GearBrand.Common + ".png";
     img.height = 100;
     img.width = 100;
-    src = document.getElementById("HeadGearSpan");
-    src.appendChild(img);
     
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Common Roll";
+    
+    src = document.getElementById("HeadGearSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
     img = document.createElement("img");
     img.src = "Images/Abilities/" + GearPics[0].GearBrand.Uncommon + ".png";
     img.height = 100;
     img.width = 100;
-    img.innerHTML = img.innerHTML + "Testing"
+    
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "UnCommon Roll";
+    
     src = document.getElementById("HeadGearSpan");
-    src.appendChild(img);
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
     
 };
 
@@ -70,12 +93,118 @@ var ClothesLB = document.getElementById('ClothesLB');
 ClothesLB.onmousedown = function(event) {
     var target = getEventTarget(event);
     ChosenClothes = (target.innerHTML);
+    
+    var myNode = document.getElementById('ClothesSpan');
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    
+    //finds the chosen pic for images to add
+    var GearPics = ClothesOriginal.filter(x => x.Name === ChosenClothes.toString())
+    
+    //creates elemetns
+    var Fig = document.createElement("figure");    
+    var img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].MainAbility + ".png";
+    img.height = 150;
+    img.width = 150;
+    
+    var FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Main Ability";
+    
+    var src = document.getElementById("ClothesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Common + ".png";
+    img.height = 100;
+    img.width = 100;
+    
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Common Roll";
+    
+    src = document.getElementById("ClothesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Uncommon + ".png";
+    img.height = 100;
+    img.width = 100;
+    
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "UnCommon Roll";
+    
+    src = document.getElementById("ClothesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
 };
 
 var ShoesLB = document.getElementById('ShoesLB');
 ShoesLB.onmousedown = function(event) {
     var target = getEventTarget(event);
     ChosenShoes = (target.innerHTML);
+    
+    var myNode = document.getElementById('ShoesSpan');
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    
+    //finds the chosen pic for images to add
+    var GearPics = ShoesOriginal.filter(x => x.Name === ChosenShoes.toString())
+    
+    //creates elemetns
+    var Fig = document.createElement("figure");    
+    var img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].MainAbility + ".png";
+    img.height = 150;
+    img.width = 150;
+    
+    var FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Main Ability";
+    
+    var src = document.getElementById("ShoesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Common + ".png";
+    img.height = 100;
+    img.width = 100;
+    
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "Common Roll";
+    
+    src = document.getElementById("ShoesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
+    
+    //create elements
+    Fig = document.createElement("figure");
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Uncommon + ".png";
+    img.height = 100;
+    img.width = 100;
+    
+    FigCaption = document.createElement("figcaption");
+    FigCaption.innerHTML = "UnCommon Roll";
+    
+    src = document.getElementById("ShoesSpan");
+    Fig.appendChild(img);
+    Fig.appendChild(FigCaption);
+    src.appendChild(Fig);
 };
 
 //FILTERING EVENTS
@@ -163,11 +292,11 @@ class Brand{
        //return myObj[Name].common;
         switch(Name){
             case "amiibo":
-                return "Any! Pray to RN Gesus!";
+                return "Any";
             case "Annaki":
                 return "Cold Blooded";
             case "Cuttlegear":
-                return "Any! Pray to the squid sisters!";
+                return "Any";
             case "Enperry":
                 return "Sub Power Up";
             case "Firefin":
@@ -175,7 +304,7 @@ class Brand{
             case "Forge":
                 return "Special Power Up";
             case "Grizzco":
-                return "Any! Only 100 Gold Eggs? Shame...";
+                return "Any";
             case "Inkline":
                 return "Bomb Defense Up";
             case "Krak-On":
@@ -203,11 +332,11 @@ class Brand{
     function getUncommon(Name){
         switch(Name){
             case "amiibo":
-                return "Any! Pray to RN Gesus!";
+                return "Any";
             case "Annaki":
                 return "Special Saver";
             case "Cuttlegear":
-                return "Any! Pray to the squid sisters!";
+                return "Any";
             case "Enperry":
                 return "Ink Resistance Up";
             case "Firefin":
@@ -215,7 +344,7 @@ class Brand{
             case "Forge":
                 return "Ink Saver (Sub)";
             case "Grizzco":
-                return "Any! Only 100 Gold Eggs? Shame...";
+                return "Any";
             case "Inkline":
                 return "Cold Blooded";
             case "Krak-On":
@@ -381,7 +510,7 @@ function FilterMain(){
 
 //create element for list
 function GenerateLBDiv(InnerText, Element){
-    var div = document.createElement("div");
+    var div = document.createElement("li");
     
     div.innerHTML = InnerText;
 
