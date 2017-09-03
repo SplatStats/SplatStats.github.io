@@ -33,6 +33,37 @@ var HeadgearLB = document.getElementById('HeadGearLB');
 HeadgearLB.onmousedown = function(event) {
     var target = getEventTarget(event);
     ChosenHedgear = (target.innerHTML);
+    
+    var myNode = document.getElementById('HeadGearSpan');
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    
+    //finds the chosen pic for images to add
+    var GearPics = HeadGearOriginal.filter(x => x.Name === ChosenHedgear.toString())
+    
+    var img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].MainAbility + ".png";
+    img.height = 150;
+    img.width = 150;
+    var src = document.getElementById("HeadGearSpan");
+    src.appendChild(img);
+    
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Common + ".png";
+    img.height = 100;
+    img.width = 100;
+    src = document.getElementById("HeadGearSpan");
+    src.appendChild(img);
+    
+    img = document.createElement("img");
+    img.src = "Images/Abilities/" + GearPics[0].GearBrand.Uncommon + ".png";
+    img.height = 100;
+    img.width = 100;
+    img.innerHTML = img.innerHTML + "Testing"
+    src = document.getElementById("HeadGearSpan");
+    src.appendChild(img);
+    
 };
 
 var ClothesLB = document.getElementById('ClothesLB');
@@ -57,7 +88,7 @@ function changeEventHandlerHead(event) {
     if(!event.target.value) alert('Please Select One');
     else {
             FilterMainAbility = event.target.value;
-            Filter();
+            Sort();
          }
 }
 
@@ -70,7 +101,7 @@ function changeEventHandlerBrand(event) {
     if(!event.target.value) alert('Please Select One');
     else {
             FilterBrand = event.target.value;
-            Filter();
+            Sort();
          }
 }
 
@@ -83,7 +114,7 @@ function changeEventHandlerStar(event) {
     if(!event.target.value) alert('Please Select One');
     else {
             FilterStar = event.target.value; 
-            Filter();
+            Sort();
          }
 }
 
@@ -104,6 +135,19 @@ class Gear{
 * BRAND CLASS
 */
 
+
+
+let myObj = {
+    "amiibo": {
+        common: "Any! Pray to RN Gesus!",   
+    },
+    "Annaki": {
+        common: "Cold Blooded",
+        uncommon: "Special Saver",
+    },
+    
+}
+
 class Brand{
 
     constructor(Name){
@@ -116,6 +160,7 @@ class Brand{
 
  //fucking js not allowing my multivalue map.... so switch statements it is
    function getCommon(Name){
+       //return myObj[Name].common;
         switch(Name){
             case "amiibo":
                 return "Any! Pray to RN Gesus!";
@@ -144,7 +189,7 @@ class Brand{
             case "SquidForce":
                 return "Ink Resistance Up";
             case "Takoroka":
-                return "Special Charge Up!";
+                return "Special Charge Up";
             case "Tentatek":
                 return "Ink Recovery Up";
             case "Toni Kensa":
@@ -229,164 +274,106 @@ function readTextFile(file, OriginalDataArray)
 }
 
 
-function Filter(){
-    var filteredHead = [];
-    var filteredClothes = [];
-    var filteredShoes = [];
+function Filter(ArrayToFilter, FilterToCheck, FilterType){
+    
+    var TempList= [];
+    TempList = ArrayToFilter;
+    
+    //does filtering need to be done
+    if (FilterToCheck == "" || FilterToCheck.toLowerCase() == "(none)"){
+        return ArrayToFilter;
+    }
+    //sorting Abilities
+    else{
+        if(FilterType == "Ability"){
+            for(var i = 0; i < TempList.length; i++){
+                if(TempList[i].MainAbility.toLowerCase() != FilterToCheck.toLowerCase()){
+                    
+                    TempList.splice(i,1);
+                    if(i = 0){
+                        i=0;
+                    }
+                    else{
+                        i--;
+                    }   
+                }
+            }
+            return TempList;
+        }
+        
+        //SortingBrands
+        if(FilterType == "Brand"){
+            for(var i = 0; i < TempList.length; i++){
+                if(TempList[i].GearBrand.Name.toLowerCase() != FilterToCheck.toLowerCase()){
+                    
+                    TempList.splice(i,1);
+                    if(i = 0){
+                        i=0;
+                    }
+                    else{
+                        i--;
+                    }   
+                }
+            }
+            return TempList;
+        }
+        
+        //Stars
+        if(FilterType == "Stars"){
+            for(var i = 0; i < TempList.length; i++){
+                if(parseInt(TempList[i].Stars) != parseInt(FilterToCheck)){
+                    
+                    TempList.splice(i,1);
+                    if(i = 0){
+                        i=0;
+                    }
+                    else{
+                        i--;
+                    }   
+                }
+            }
+        }
+        return TempList;
+    }
+    
+    return TempList;
+}
+
+function Sort(){
+    
+    var Head = HeadGearOriginal.slice(0);
+    var clothes = ClothesOriginal.slice(0);
+    var Shoes = ShoesOriginal.slice(0);
+    
     ClearList();
     
-    //filter out main abilities
-    for(var i =0; i < HeadGearOriginal.length; i++){
-        
-        if(FilterMain == "(None)"){
-                continue;
-            }
-        
-        if (HeadGearOriginal[i].MainAbility == FilterMainAbility){
-            filteredHead.push(HeadGearOriginal[i]);
-        }
-    }
+    Head = Filter(Head, FilterMainAbility, "Ability");
+    Head = Filter(Head, FilterBrand, "Brand");
+    Head = Filter(Head, FilterStar, "Stars");
     
-    //filter out Brand
-    for(var i =0; i < filteredHead.length; i++){
-        if (filteredHead[i].GearBrand.Name != FilterBrand ){
-            
-            if(FilterBrand == "(None)"){
-                continue;
-            }
-            
-            filteredHead.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
+    clothes = Filter(clothes, FilterMainAbility, "Ability");
+    clothes = Filter(clothes, FilterBrand, "Brand");
+    clothes = Filter(clothes, FilterStar, "Stars");
     
-    //filter out Brand
-    for(var i =0; i < filteredHead.length; i++){
-        FilterStar = FilterStar.replace("\"", "")
-        if (parseInt(filteredHead[i].Stars) == parseInt(FilterStar) ){
-        }
-        else{
-            if(FilterStar == "(None)"){
-                continue;
-            }
-            
-            filteredHead.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
-    
-    //filter out main abilities
-    for(var i =0; i < ClothesOriginal.length; i++){
-        if (ClothesOriginal[i].MainAbility == FilterMainAbility){
-            filteredClothes.push(ClothesOriginal[i]);
-        }
-    }
-    
-    //filter out Brand
-    for(var i =0; i < filteredClothes.length; i++){
-        if (filteredClothes[i].GearBrand.Name != FilterBrand ){
-            
-            if(FilterBrand == "(None)"){
-                continue;
-            }
-            
-            filteredClothes.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
-    
-    //filter out Brand
-    for(var i =0; i < filteredClothes.length; i++){
-        if (parseInt(filteredClothes[i].Stars) == parseInt(FilterStar) ){
-        }
-        else{
-            if(FilterStar == "(None)"){
-                continue;
-            }
-            
-            filteredClothes.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
-    
-    
-    //filter out main abilities
-    for(var i =0; i < ShoesOriginal.length; i++){
-        if (ShoesOriginal[i].MainAbility == FilterMainAbility){
-            filteredShoes.push(ShoesOriginal[i]);
-        }
-    }
-    
-    //filter out Brand
-    for(var i =0; i < filteredShoes.length; i++){
-        if (filteredShoes[i].GearBrand.Name != FilterBrand ){
-            
-            if(FilterBrand == "(None)"){
-                continue;
-            }
-            
-            filteredShoes.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
-    
-    //filter out Brand
-    for(var i =0; i < filteredShoes.length; i++){
-        if (parseInt(filteredShoes[i].Stars) == parseInt(FilterStar) ){
-        }
-        else{
-            if(FilterStar == "(None)"){
-                continue;
-            }
-            
-            filteredShoes.splice(i,1);
-            if(i = 0){
-                i=0;
-            }
-            else{
-                i--;
-            }
-        }
-    }
-    
+    Shoes = Filter(Shoes, FilterMainAbility, "Ability");
+    Shoes = Filter(Shoes, FilterBrand, "Brand");
+    Shoes = Filter(Shoes, FilterStar, "Stars");
     
     //display them 
     
-    for(var i = 0; i< filteredHead.length;i++){
-        GenerateLBDiv(filteredHead[i].Name, "HeadGearLB");
+    for(var i = 0; i< Head.length;i++){
+        GenerateLBDiv(Head[i].Name, "HeadGearLB");
     }
-    for(var i = 0; i< filteredClothes.length;i++){
-        GenerateLBDiv(filteredClothes[i].Name, "ClothesLB");
+    for(var i = 0; i< clothes.length;i++){
+        GenerateLBDiv(clothes[i].Name, "ClothesLB");
     }
-    for(var i = 0; i< filteredShoes.length;i++){
-        GenerateLBDiv(filteredShoes[i].Name, "ShoesLB");
+    for(var i = 0; i< Shoes.length;i++){
+        GenerateLBDiv(Shoes[i].Name, "ShoesLB");
     }
+    
+    
 }
+
 
 function FilterMain(){
     
